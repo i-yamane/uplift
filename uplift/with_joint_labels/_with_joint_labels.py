@@ -186,8 +186,6 @@ class UpliftRampThresholdSGD(BaseEstimator):
             r32 = f2r[f]
         r32 = r32.astype(np.float32).reshape(n, 1)
 
-        Debug.print(np.sum((z32 == np.sign(self._model(x32).data)) * 1.0 / len(z32)), message='before')
-
         for epoch in range(self.n_epochs):
             self.slope += self.slope_increment
             if self.online:
@@ -195,7 +193,6 @@ class UpliftRampThresholdSGD(BaseEstimator):
             else:
                 perm = np.random.permutation(n)  # if aim is batch optimization
 
-            sum_loss = 0  # for debugging
             for i in range(0, n, self.batch_size):
                 # Reguire: 0 <= i < n_train and (i - 0) % batch_size == 0.
                 x_batch = x32[perm[i: i + self.batch_size], :]
@@ -214,21 +211,6 @@ class UpliftRampThresholdSGD(BaseEstimator):
                 self._model.cleargrads()
                 loss.backward()
                 opt.update()
-
-                sum_loss += loss.data  # for debugging
-
-            if False and epoch % 2 == 0:
-                print((r_batch * F.sigmoid(- self.slope * z_batch * self._model(x_batch))).data.T)
-                print(sum_loss / self.batch_size)  # for debugging
-                #
-                # print(self._model.l1.W.data) # for debugging
-                # print(self._model.l1.b.data) # for debugging
-
-        Debug.print(np.sum((z32 == np.sign(self._model(x32).data)) * 1.0 / len(z32)), message='after')
-        Debug.print(self._model.l1.W.data, message='W learned')
-        Debug.print(self._model.l1.b.data, message='b learned')
-        # print(np.array([z == zero_one(zz) for z, zz in zip(z32, self._model(x32))]))
-        # code.interact(local=dict(globals(), **locals()))
 
     def score(self, x, yt):
         y, t = unpack(yt)
@@ -249,19 +231,19 @@ class UpliftRampThresholdSGD(BaseEstimator):
     def ranking_score(self, x):
         return self._model(x).data
 
-    class Net33(Chain):
-        # initializer = chainer.initializers.HeNormal()
-        def __init__(self, n_2ndunits=3, dim_out=1):
-            super(UpliftRampThresholdSGD.Net33, self).__init__(
-                l1=L.Linear(None, n_2ndunits),
-                l2=L.Linear(n_2ndunits, dim_out)
-            )
+class Net33(Chain):
+    # initializer = chainer.initializers.HeNormal()
+    def __init__(self, n_2ndunits=3, dim_out=1):
+        super(UpliftRampThresholdSGD.Net33, self).__init__(
+            l1=L.Linear(None, n_2ndunits),
+            l2=L.Linear(n_2ndunits, dim_out)
+        )
 
-        def __call__(self, x):
-            phi = x.astype(np.float32)
-            h1 = F.relu(self.l1(phi))
-            h2 = self.l2(h1)
-            return h2
+    def __call__(self, x):
+        phi = x.astype(np.float32)
+        h1 = F.relu(self.l1(phi))
+        h2 = self.l2(h1)
+        return h2
 
     class PredictiveFunc(Chain):
         def __init__(self, dim_out, init_l1=None):

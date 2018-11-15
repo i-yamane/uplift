@@ -24,7 +24,7 @@ import matplotlib.pyplot as plt
 
 import code
 
-from .util import mean_err, zero_one, sym2numpy_func, check_grad, taylor_err, UpliftMixin, UpliftWrap, calc_AUUC, max_uplift, calc_AUUC2, max_uplift2, calc_actual_uplift, plot_uplift_curve, plot_diff_prob, unpack, calc_uplift2, calc_uplift
+from ._util import mean_err, zero_one, sym2numpy_func, check_grad, taylor_err, UpliftMixin, UpliftWrap, calc_AUUC, max_uplift, calc_AUUC2, max_uplift2, calc_actual_uplift, plot_uplift_curve, plot_diff_prob, unpack, calc_uplift2, calc_uplift
 
 
 class UpliftCombMLECV(BaseEstimator):

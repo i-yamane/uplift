@@ -1,3 +1,7 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+
 def mean_err(z_true, z_hat):
     return np.mean(np.abs(z_true - z_hat))
 
@@ -8,6 +12,7 @@ def zero_one(z):
     else:
         zz = 0
     return zz
+
 
 def sym2numpy_func(args, expr, nin, nout):
     """Converts a SymPy expression into a NumPy lambda object that can be broad-casted over NumPy arrays.

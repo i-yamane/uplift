@@ -5,7 +5,6 @@ from sklearn.linear_model import LogisticRegressionCV, LogisticRegression
 import sklearn.svm as svm
 import itertools as it
 from sklearn.model_selection import GridSearchCV
-from uplift.rampcccp.rampcccp import RampCCCP
 from sklearn.metrics import make_scorer, zero_one_loss
 
 from sklearn.base import BaseEstimator
@@ -923,33 +922,7 @@ class UpliftSVMThreshold(BaseEstimator):
 
     def fit_z(self, x, z):
         # parameters = {'kernel': ['rbf', ], 'C': [10, 20, 30], 'gamma': [0.125, 0.25, 0.5, 1, 2, ]}
-        # self._model = GridSearchCV(RampCCCP(), parameters, scoring=make_scorer(zero_one_loss), n_jobs=8)
         self._model = svm.SVC(kernel='linear', class_weight=self.class_weight, tol=1E-5)
-        self._model.fit(x, z)
-        return self
-
-    def score(self, x, yt):
-        y, t = unpack(yt)
-        return calc_AUUC(model=self, x=x, y=y, t=t)
-
-    def predict(self, x_test):
-        return self._model.predict(x_test)
-
-
-class UpliftRampThreshold(BaseEstimator):
-    def __init__(self, class_weight=None):
-        self.class_weight = class_weight
-        self._model = RampCCCP(kernel='linear', class_weight=self.class_weight, tol=1E-5)
-
-    def fit(self, x, yt):
-        y, t = unpack(yt)
-        z = np.array(y == t, dtype=int)
-        self.fit_z(x, z)
-        return self
-
-    def fit_z(self, x, z):
-        # parameters = {'kernel': ['rbf', ], 'C': [10, 20, 30], 'gamma': [0.125, 0.25, 0.5, 1, 2, ]}
-        # self._model = GridSearchCV(RampCCCP(), parameters, scoring=make_scorer(zero_one_loss), n_jobs=8)
         self._model.fit(x, z)
         return self
 

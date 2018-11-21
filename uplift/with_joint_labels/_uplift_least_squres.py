@@ -1,5 +1,5 @@
 import numpy as np
-from ._with_joint_labels import unpack, calc_AUUC
+from ._util import unpack, calc_AUUC
 from sklearn.base import BaseEstimator
 from sklearn.model_selection import GridSearchCV
 

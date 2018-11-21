@@ -1,13 +1,13 @@
 # uplift
 Code for uplift modeling.
 
-Requirements:
+## Requirements:
 * python >=3
 * numpy
 * scipy
 * chainer ==3
 
-Installation:
+## Installation:
 * Git clone this repository:
 ```bash
 git clone https://github.com/i-yamane/uplift.git
@@ -21,7 +21,7 @@ pip install uplift
 pip install -e uplift
 ```
 
-Update:
+## Update:
 * Pull the latest changes and upgrade with pip:
 ```bash
 cd /path/to/uplift
@@ -29,6 +29,6 @@ git pull
 pip install --upgrade .
 ```
 
-Modules:
-* with_joint_labels: Modules for uplift modeling from joint labels.
+## Modules:
+* with_joint_labels: This module contains methods for uplift modeling from joint labels.
 

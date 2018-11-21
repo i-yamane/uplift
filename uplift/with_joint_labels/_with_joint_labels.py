@@ -4,8 +4,6 @@ import numpy.random as random
 from sklearn.linear_model import LogisticRegressionCV, LogisticRegression
 import sklearn.svm as svm
 import itertools as it
-from sklearn.model_selection import GridSearchCV
-from sklearn.metrics import make_scorer, zero_one_loss
 
 from sklearn.base import BaseEstimator
 

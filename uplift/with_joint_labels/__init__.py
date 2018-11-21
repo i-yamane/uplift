@@ -1,6 +1,6 @@
+from ._with_joint_labels import UpliftLogisticRegression, LogisticSeparate, TwoLogistic
 from ._uplift_ramp import UpliftRampThresholdSGDManyTimes, UpliftSigCV, UpliftRampThresholdSGD, Net33
 from ._uplift_random import UpliftRandom
-from ._with_joint_labels import UpliftLogisticRegression
 from ._uplift_least_squres import UpliftLS
 from ._uplift_least_squres import UpliftLSCV
 from ._with_joint_labels import UpliftSVMThreshold

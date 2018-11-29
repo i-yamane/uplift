@@ -11,7 +11,6 @@ from ._two_neural_nets import TwoNeuralNets
 from ._minmax_linear import MinMaxLinear
 from ._minmax_neural_nets import MinMaxNeuralNets
 from ._minmax_neural_nets import MinMaxLayered
-from ._minmax_robust import MinMaxNeuralNetsRobust
 from ._minmax_neural_net_with_linear import MinMaxNNwithLin
 from ._minmax_model_selection import GridSearchMinMax
 from ._min_grad_norm import MinGradNormNeuralNet

@@ -4,7 +4,7 @@ import itertools as it
 
 from sklearn.base import BaseEstimator
 
-from ._util import calc_AUUC, unpack
+from ._utils import calc_AUUC, unpack
 
 
 class UpliftSVMThreshold(BaseEstimator):

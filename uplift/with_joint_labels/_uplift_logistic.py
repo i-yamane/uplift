@@ -3,7 +3,7 @@ import numpy as np
 from sklearn.base import BaseEstimator
 from sklearn.linear_model import LogisticRegressionCV, LogisticRegression
 
-from ._util import UpliftWrap, calc_AUUC, unpack
+from ._utils import UpliftWrap, calc_AUUC, unpack
 
 
 class LogisticSeparate(BaseEstimator):

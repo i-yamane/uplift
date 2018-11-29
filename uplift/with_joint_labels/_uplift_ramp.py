@@ -10,7 +10,7 @@ from chainer import Chain
 import chainer.functions as F
 import chainer.links as L
 
-from ._util import mean_err, zero_one, calc_AUUC, unpack
+from ._utils import mean_err, zero_one, calc_AUUC, unpack
 
 
 class UpliftRampThresholdSGDManyTimes(BaseEstimator):

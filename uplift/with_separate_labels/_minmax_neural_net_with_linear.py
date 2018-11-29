@@ -85,7 +85,6 @@ class MinMaxNNwithLin(UpliftSepMixin):
                 opt.lr = self.lr
             else:
                 opt.update()
-            # Debug.print(loss.data, 'loss')
             if train_iter.is_new_epoch:
                 if self.debug:
                     plt.sca(ax1)

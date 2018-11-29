@@ -5,7 +5,6 @@ import chainer.functions as F
 from chainer import iterators
 from chainer import optimizers
 from ._utils import UpliftSepMixin
-from uplift.with_separate_labels import Debug
 from ._utils import separate_xlsk
 from ._neural_nets_util import NN
 
@@ -85,7 +84,6 @@ class MinMaxNeuralNets(UpliftSepMixin):
                 if 0 < loss.data:
                     opt_f.update()
                 opt_g.update()
-                # Debug.print(loss.data, 'loss')
                 if train_iter.is_new_epoch:
                     print('epoch:{:02d} train_loss:{:.04f} '.format(
                         train_iter.epoch, float(loss.data)), end='')
@@ -101,8 +99,6 @@ class MinMaxNeuralNets(UpliftSepMixin):
                 self.model_f_.cleargrads()
                 loss_f.backward()
                 opt_f.update()
-                # Debug.print(loss_f.data, 'loss_f')
-                # Debug.print(-loss_g.data, 'loss_g')
             elif self.version == 'sq':
                 loss = self.lossfun(x, lsk) ** 2
                 self.model_f_.cleargrads()
@@ -110,7 +106,6 @@ class MinMaxNeuralNets(UpliftSepMixin):
                 loss.backward()
                 opt_f.update()
                 opt_g.update()
-                Debug.print(loss.data, 'loss')
             else:
                 for _ in range(5):
                     loss_g = -self.lossfun(x, lsk)

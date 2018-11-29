@@ -1,6 +1,5 @@
 from ._utils import separate_xlsk
 from ._utils import separate_xlskr
-from ._utils import Debug
 from ._minmax_linear import MinMaxLinear
 from ._four_logistic_regressors import FourLogistic
 from ._four_ridge_regressors import FourRidgeRegressors

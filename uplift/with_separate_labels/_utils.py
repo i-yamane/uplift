@@ -1,5 +1,4 @@
 import numpy as np
-import inspect
 
 import warnings
 warnings.simplefilter('default')
@@ -8,32 +7,6 @@ try:
     import cvxpy as cvx
 except ImportError:
     warnings.warn('Failed to import cvxpy. Do not enable `binary` option in MinMaxLinear.', ImportWarning)
-
-
-class Debug:
-    @staticmethod
-    def print(*values, message=None, end='\n'):
-        if message is not None:
-            print(message, end=': ')
-
-        print(', '.join([str(val) for val in values]), end=end)
-
-    @staticmethod
-    def print_var(*variables, message=None, end='\n'):
-        if message is not None:
-            print(message, end='> ')
-
-        for var in variables:
-            names = Debug.retrieve_name_val(var)
-            print(', '.join([name + ': ' + str(var) for name in names]), end=end)
-
-    @staticmethod
-    def retrieve_name_val(var, trace_back=1):
-        frame = inspect.currentframe().f_back
-        for i in range(trace_back):
-            frame = frame.f_back
-        callers_local_vars = frame.f_locals.items()
-        return [name for name, val in callers_local_vars if val is var]
 
 
 def overrides(interface_class):

@@ -15,7 +15,6 @@ from ._neural_nets_util import NN
 
 from ._utils import UpliftSepMixin
 from ._utils import separate_xlsk
-from uplift.with_separate_labels import Debug
 
 
 class USepSq(BaseEstimator, UpliftSepMixin):
@@ -55,8 +54,6 @@ class USepSq(BaseEstimator, UpliftSepMixin):
         Greg = evec.dot(np.diag(eval + lam * np.sign(eval))).dot(evec.T)
 
         self.w_ = np.linalg.solve(Greg, h)
-
-        # Debug.print(np.linalg.norm(G.dot(self.w_) - h), message='|Gw - h|')
 
         return self
 
@@ -107,12 +104,6 @@ class USepLSCV(BaseEstimator):
             param_grid=self.params_grid,
             cv=self.cv)
         self.model_.fit(x, lsk)
-        Debug.print(self.model_.best_index_, message='Best Index')
-        Debug.print(self.model_.best_params_, message='Best Params')
-        Debug.print(self.model_.cv_results_['mean_train_score'],
-                    message='Mean Train Score')
-        Debug.print(self.model_.cv_results_['mean_test_score'],
-                    message='Mean Test Score')
 
     def predict(self, x):
         return self.model_.predict(x)
@@ -157,8 +148,6 @@ class LSGradNormLinear(BaseEstimator, UpliftSepMixin):
         G = np.dot(wphit.T, phit)
 
         self.w_ = np.linalg.solve(G.dot(G) + self.reg_level * np.eye(self.n_basis_), G.dot(h))
-
-        # Debug.print(np.linalg.norm(G.dot(self.w_) - h), message='|Gw - h|')
 
         return self
 
@@ -239,8 +228,6 @@ class USepLSModified(BaseEstimator, UpliftSepMixin):
         v = wphit ** 2 + self.reg_level * np.ones(shape=(self.n_basis_,))
 
         # self.w_ = np.linalg.solve(G.dot(G) + self.reg_level * np.eye(self.n_basis_), G.dot(h))
-
-        # Debug.print(np.linalg.norm(G.dot(self.w_) - h), message='|Gw - h|')
 
         return self
 

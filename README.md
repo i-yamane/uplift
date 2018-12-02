@@ -6,6 +6,7 @@ Code for uplift modeling.
 * numpy
 * scipy
 * chainer ==3
+* scikit-learn
 
 ## Installation:
 * Git clone this repository:

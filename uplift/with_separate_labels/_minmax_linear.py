@@ -216,7 +216,6 @@ class MinMaxLinear(UpliftSepMixin, BaseEstimator):
 
         phi = np.exp(- distmat / band_width)
         return phi
-        #return np.c_[phi, 1E+10 * np.ones(x.shape[0])]
 
     @staticmethod
     def delta_kernel(x, v):

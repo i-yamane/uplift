@@ -174,7 +174,6 @@ class MinMaxLinear(UpliftSepMixin, BaseEstimator):
             distmat = xx.T - 2 * vx + vv
             phi = np.exp(- distmat / band_width)
             return phi
-            # return np.c_[phi, 1E+10 * np.ones(x.shape[0])]
         elif self.bfunc == 'polynomial':
             phi = self.poly_.fit_transform(x)
             return phi
@@ -258,7 +257,6 @@ class MinMaxLinear(UpliftSepMixin, BaseEstimator):
             b = np.mean(rz * z * psi_z, axis=0)
             C = ((rw * psi_w).T.dot(psi_w) / w.shape[0] + (rz * psi_z).T.dot(psi_z) / z.shape[0]) / 2
 
-            #return 2 * self.alpha_.T.dot(A).dot(self.beta_) - 4 * b.T.dot(self.beta_) - self.beta_.T.dot(C).dot(self.beta_)
             return obj_helper(
                 alpha=self.alpha_,
                 beta=self.beta_,
@@ -293,8 +291,8 @@ class MinMaxLinear(UpliftSepMixin, BaseEstimator):
                 b=b,
                 C=C
             )
-            # return 2 * self.alpha_.T.dot(A).dot(self.beta_) - 4 * b.T.dot(self.beta_) - self.beta_.T.dot(C).dot(self.beta_)
 
 
 def obj_helper(alpha, beta, A, b, C):
     return 2 * alpha.T.dot(A).dot(beta) - 4 * b.T.dot(beta) - beta.T.dot(C).dot(beta)
+

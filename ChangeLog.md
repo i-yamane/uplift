@@ -1,6 +1,6 @@
 # Changelog for uplift
 
-## Unreleased changes
+## 0.3.0
 ### Added
 - Add methods for uplift modeling from separate labels.
 

@@ -10,7 +10,7 @@ from chainer import Chain
 import chainer.functions as F
 import chainer.links as L
 
-from ._util import mean_err, zero_one, calc_AUUC, unpack
+from ._utils import mean_err, zero_one, calc_AUUC, unpack
 
 
 class UpliftRampThresholdSGDManyTimes(BaseEstimator):
@@ -243,6 +243,6 @@ class Net33(Chain):
 
         def __call__(self, x):
             # chainer does not support float64 but float32
-            phi = x.astype(np.float32)  # TODO: Feature mapping here
+            phi = x.astype(np.float32)
             return self.l1(phi)
 

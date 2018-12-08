@@ -6,6 +6,8 @@ Code for uplift modeling.
 * numpy
 * scipy
 * chainer ==3
+* scikit-learn
+* matplotlib
 
 ## Installation:
 * Git clone this repository:
@@ -31,4 +33,5 @@ pip install --upgrade .
 
 ## Modules:
 * with_joint_labels: This module contains methods for uplift modeling from joint labels.
+* with_separate_labels: This module contains methods for [uplift modeling from separate labels](https://arxiv.org/abs/1803.05112 "Uplift Modeling from Separate Labels").
 

@@ -2,7 +2,7 @@ import numpy as np
 import numpy.random as random
 from sklearn.base import BaseEstimator
 
-from ._util import unpack, calc_AUUC
+from ._utils import unpack, calc_AUUC
 
 
 class UpliftRandom(BaseEstimator):

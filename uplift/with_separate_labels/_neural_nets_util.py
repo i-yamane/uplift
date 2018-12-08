@@ -56,8 +56,6 @@ class Sklearnify(BaseEstimator):
         return self
 
     def predict(self, x):
-        # yhat = np.argmax(self.decision_function(x), axis=1)
-
         x = x.astype(np.float32)
         yhat = np.argmax(self.model.predictor(x).data, axis=1)
 

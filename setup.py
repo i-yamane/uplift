@@ -10,7 +10,7 @@ with open(path.join(path2readme, 'README.md'), encoding='utf-8') as f:
 
 setup(
     name='uplift',
-    version='0.2.0',
+    version='0.3.0',
     description='Code for Uplift Modeling.',
     long_description=long_description,
     url='https://github.com/i-yamane/uplift',

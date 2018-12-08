@@ -98,8 +98,6 @@ class TwoLogistic(BaseEstimator):
 
     def fit(self, x=None, yt=None):
         y, t = unpack(yt)
-        # z = np.array(y == t, dtype=int)
-        # z = 2 * z - 1  # Change representation from {0, 1} to {-1, +1}
 
         # py[0]: p(y=1|x,t=-1), py[1]: p(y=1|x,t=1)
         self.py_ = [LogisticRegression().fit(x[t == i, :], y[t == i]) for i in [0, 1]]

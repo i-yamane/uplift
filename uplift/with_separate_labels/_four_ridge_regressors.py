@@ -25,7 +25,6 @@ class FourRidgeRegressors(UpliftSepMixin):
                 self.pt_[i] = LogisticRegression().fit(xt[kt == kk, :], t[kt == kk])
             else:
                 tt = tset[0]
-                #pt1 = (1+tt)/2
                 pt1 = tt
                 self.pt_[i] = ConstantPredictor(p1=pt1)
             if len(yset) == 2:

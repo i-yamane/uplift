@@ -118,16 +118,6 @@ def max_uplift(model, x, y, t, propensity):
     return prop_max, np.max(uplift)
 
 
-def calc_AUUC2(model, x, y, t, props=np.linspace(0, 1, 100)):
-    _, uplift = calc_uplift(model, x, y, t, props)
-    return np.mean(uplift)
-
-
-def max_uplift2(model, x, y, t, props=np.linspace(0, 1, 100)):
-    prop_max, uplift = calc_uplift(model, x, y, t, props)
-    return prop_max, np.max(uplift)
-
-
 def calc_actual_uplift(model, x, gen_y_given_x_ctl, gen_y_given_x_trt):
     n = x.shape[0]
     rank = model.rank(x)
@@ -178,45 +168,6 @@ def unpack(yt):
         raise ValueError
 
     return y, t
-
-
-def calc_uplift2(model, x, y, t, props=None):
-    n_trt = np.sum(t)
-    n_ctl = len(t) - n_trt
-
-    x_ctl = x[t == 0, :]
-    x_trt = x[t == 1, :]
-    y_ctl = y[t == 0]
-    y_trt = y[t == 1]
-
-    # if props is None:
-    #     Proportions of the treatment group
-        # props = [k / n_trt for k in range(n_trt + 1)] + [k / n_ctl for k in range(n_ctl + 1)]
-        # props = list(set(props))  # Unique list
-        # props.sort()  # Sort *in place*
-
-    nall = len(t)
-    if props is None:
-        props = [(k + 1) / nall for k in range(nall)]
-
-    rank_ctl = model.rank(x_ctl)
-    rank_trt = model.rank(x_trt)
-
-    uplift = []
-    for i, prop_tgt in enumerate(props):
-        top_k_ctl = rank_ctl[0:int(prop_tgt * n_ctl)]
-        top_k_trt = rank_trt[0:int(prop_tgt * n_trt)]
-        if n_ctl == 0 or n_trt == 0:
-            raise ValueError('Provide at least one sample in each of the control and the treatment sets.')
-
-        r_ctl = np.sum(y_ctl[top_k_ctl]) / n_ctl
-        r_trt = np.sum(y_trt[top_k_trt]) / n_trt
-        # Note: These are not np.mean(y_...[top_k_...]).
-        # The denominators are different.
-
-        uplift.append(r_trt - r_ctl)
-
-    return props, np.array(uplift)
 
 
 def calc_uplift(model, x, y, t, propensity):
